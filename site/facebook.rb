@@ -27,6 +27,7 @@ module RentBot
 
       def new_post_url
         if last_post_text != @last_post_text
+          @last_post_text = last_post_text
           last_post_url
         end
       end

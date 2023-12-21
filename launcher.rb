@@ -23,7 +23,7 @@ module RentBot
             sleep(POOL_PERIOD + jitter)
           end
         rescue StandardError => e
-          TelegramChannel.send_message(e.inspect)
+          TelegramChannel.send_message("#{e.class}: #{e.message}")
           raise e
         end.tap { sleep(jitter) }
       end.each(&:join)

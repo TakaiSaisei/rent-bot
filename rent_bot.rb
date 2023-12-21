@@ -17,6 +17,7 @@ module RentBot
     options = Selenium::WebDriver::Chrome::Options.new
 
     [
+      "no-sandbox",
       "headless",
       "window-size=800x1800",
       "disable-gpu", # https://developers.google.com/web/updates/2017/04/headless-chrome
