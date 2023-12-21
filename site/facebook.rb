@@ -46,7 +46,7 @@ module RentBot
 
       def last_post_url
         url = last_post.first(:xpath, "//a[starts-with(@href, '#{post_url_pattern}')]")["href"]
-        useless_from = s.index("?") - 2
+        useless_from = url.index("?") - 2
         url.slice(0..useless_from)
       end
 
