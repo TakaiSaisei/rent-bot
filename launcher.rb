@@ -17,11 +17,14 @@ module RentBot
             if (post_url = site.new_post_url)
               # TelegramChannel.send_message(notification(group, site.url, post_url))
               # TelegramChannel.send_photo(site.screenshot)
-              TelegramChannel.send_notification(site.screenshot, post_url)
+              TelegramChannel.send_notification(site.screenshot, post_url, site.url)
             end
 
             sleep(POOL_PERIOD + jitter)
           end
+        rescue StandardError => e
+          TelegramChannel.send_message(e.inspect)
+          raise e
         end.tap { sleep(jitter) }
       end.each(&:join)
     end

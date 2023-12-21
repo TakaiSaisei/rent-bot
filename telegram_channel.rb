@@ -18,9 +18,13 @@ module RentBot
         end
       end
 
-      def send_notification(image_path, post_url)
+      def send_notification(image_path, post_url, group_url)
         Telegram::Bot::Client.run(TOKEN) do |bot|
-          bot.api.send_photo(chat_id: CHANNEL, photo: Faraday::UploadIO.new(image_path, "image/png"), caption: post_url)
+          bot.api.send_photo(
+            chat_id: CHANNEL,
+            photo: Faraday::UploadIO.new(image_path, "image/png"),
+            caption: "#{post_url}\n\n#{group_url}"
+          )
         end
       end
     end
