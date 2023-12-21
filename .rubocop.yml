@@ -1,0 +1,39 @@
+require:
+  - rubocop-performance
+  - rubocop-capybara
+
+inherit_gem:
+  rubocop-shopify: rubocop.yml
+
+AllCops:
+  TargetRubyVersion: 3.2
+  NewCops: enable
+  Exclude:
+    - "bin/**/*"
+
+Naming/InclusiveLanguage:
+  Enabled: false
+
+Style/Documentation:
+  Enabled: false
+
+Layout/EmptyLinesAroundAccessModifier:
+  EnforcedStyle: around
+
+Layout/IndentationConsistency:
+  EnforcedStyle: normal
+
+Style/SymbolArray:
+  EnforcedStyle: percent
+
+Style/WordArray:
+  EnforcedStyle: percent
+
+Style/MethodCallWithArgsParentheses:
+  Enabled: false
+
+Metrics/MethodLength:
+  Max: 20
+
+Style/HashSyntax:
+  EnforcedShorthandSyntax: never
