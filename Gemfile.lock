@@ -108,7 +108,6 @@ PLATFORMS
 DEPENDENCIES
   capybara
   capybara-sessionkeeper
-  faraday
   rubocop
   rubocop-capybara
   rubocop-performance

@@ -5,3 +5,7 @@ require_relative "../rent_bot"
 
 launcher = RentBot::Launcher.new
 launcher.start
+
+while true
+  sleep
+end

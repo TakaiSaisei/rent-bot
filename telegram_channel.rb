@@ -6,25 +6,28 @@ module RentBot
     CHANNEL = "-1002098469086"
 
     class << self
-      def send_message(text)
+      def send_plain_message(text)
         Telegram::Bot::Client.run(TOKEN) do |bot|
-          bot.api.send_message(chat_id: CHANNEL, text: text, parse_mode: "HTML")
+          bot.api.send_message(chat_id: CHANNEL, text: text)
         end
       end
 
-      def send_photo(path)
+      def send_images(images, caption = {})
         Telegram::Bot::Client.run(TOKEN) do |bot|
-          bot.api.send_photo(chat_id: CHANNEL, photo: Faraday::UploadIO.new(path, "image/png"))
+          bot.api.sendMediaGroup(chat_id: CHANNEL, media: serialized_images(images, caption))
         end
       end
 
-      def send_notification(image_path, post_url, group_url)
-        Telegram::Bot::Client.run(TOKEN) do |bot|
-          bot.api.send_photo(
-            chat_id: CHANNEL,
-            photo: Faraday::UploadIO.new(image_path, "image/png"),
-            caption: "#{post_url}\n\n#{group_url}"
-          )
+      private
+
+      def serialized_images(images, caption)
+        images.map do |image|
+          {
+            type: "photo",
+            media: image,
+          }
+        end.tap do |ary|
+          ary.first.merge!(caption)
         end
       end
     end

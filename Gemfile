@@ -8,7 +8,6 @@ gem "capybara"
 gem "capybara-sessionkeeper"
 gem "selenium-webdriver"
 gem "telegram-bot-ruby"
-gem "faraday"
 
 gem "rubocop"
 gem "rubocop-capybara"

@@ -3,7 +3,3 @@
 # IDE shit
 .idea/
 .vscode/
-
-# Screenshots
-/tmp
-!/tmp/screenshots/.keep
