@@ -22,6 +22,7 @@ module RentBot
     [
       "no-sandbox",
       "headless",
+      "window-size=800x1800",
       "disable-gpu", # https://developers.google.com/web/updates/2017/04/headless-chrome
     ].each { |arg| options.add_argument(arg) }
 
