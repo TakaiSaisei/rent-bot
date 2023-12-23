@@ -40,7 +40,7 @@ module RentBot
         end
 
         def more_button
-          @post_el.first(:xpath, ".//div[@role='button' and not(@aria-haspopup='menu')]")
+          @post_el.first(:xpath, ".//div[@role='button' and contains(string(), 'Ещё')]")
         rescue Capybara::ExpectationNotMet
           # Text is not toggable
         end
