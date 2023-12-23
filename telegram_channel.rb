@@ -14,6 +14,14 @@ module RentBot
         end
       end
 
+      def send_html_message(html)
+        safe_send do
+          Telegram::Bot::Client.run(TOKEN) do |bot|
+            bot.api.send_message(chat_id: CHANNEL, text: html, parse_mode: "HTML")
+          end
+        end
+      end
+
       def send_images(images, caption = {})
         safe_send do
           Telegram::Bot::Client.run(TOKEN) do |bot|

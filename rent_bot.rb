@@ -13,6 +13,7 @@ require_relative "launcher"
 require_relative "post"
 require_relative "post_notifier"
 require_relative "post_retriever"
+require_relative "sized_array"
 require_relative "telegram_channel"
 
 module RentBot
@@ -22,8 +23,8 @@ module RentBot
     [
       "no-sandbox",
       "headless",
-      "window-size=800x1800",
       "disable-gpu", # https://developers.google.com/web/updates/2017/04/headless-chrome
+      "disable-notifications",
     ].each { |arg| options.add_argument(arg) }
 
     Capybara::Selenium::Driver.new(app, browser: :chrome, options: options)

@@ -20,14 +20,30 @@ module RentBot
         self
       end
 
-      def last_post
-        Facebook::PostBuilder.new(post_el: last_post_el, group_url: @url).create
+      def posts
+        post_els.filter_map do |el|
+          Facebook::PostBuilder.new(post_el: el, group_url: @url).create
+        end
       end
 
       private
 
-      def last_post_el
-        @browser.first(:css, "div[role='article']", wait: 60)
+      def feed
+        @browser.first(:css, "div[role='feed']")
+      end
+
+      def post_els
+        scroll_down
+        # is article and not a comment
+        feed.all(:xpath, ".//div[@role='article' and not(@tabindex)]")
+      end
+
+      def scroll_down
+        sleep 3
+        @browser.execute_script("window.scrollBy(0,1000)")
+        sleep 3
+        @browser.execute_script("window.scrollBy(0,700)")
+        sleep 3
       end
     end
   end

@@ -27,15 +27,23 @@ module RentBot
     private
 
     def start_listening
-      last_id = nil
+      processed = SizedArray.new(50)
 
       loop do
         @site.refresh
 
-        current = @site.last_post
-        if current.id != last_id
-          last_id = current.id
-          @on[:new_post].call(current)
+        feed = @site.posts
+
+        if processed.empty?
+          processed << feed.first.id
+          @on[:new_post].call(feed.first)
+        else
+          feed.each do |post|
+            break if processed.include?(post.id)
+
+            processed << post.id
+            @on[:new_post].call(post)
+          end
         end
 
         sleep(@poll_interval + jitter)

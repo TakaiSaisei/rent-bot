@@ -11,6 +11,8 @@ module RentBot
 
         def create
           Post.new(id: id, url: url, source_url: @group_url, text: text, images: images)
+        rescue Capybara::ExpectationNotMet
+          # Not a post, skip...
         end
 
         private
@@ -22,14 +24,14 @@ module RentBot
         def url
           @url ||=
             begin
-              url = @post_el.first(:xpath, "//a[starts-with(@href, '#{post_url_pattern}')]")["href"]
+              url = @post_el.first(:xpath, ".//a[starts-with(@href, '#{post_url_pattern}')]")["href"]
               useless_from = url.index("?") - 2
               url.slice(0..useless_from)
             end
         end
 
         def text
-          more_button.click
+          more_button&.click
           @post_el.first(:xpath, ".//div[@data-ad-comet-preview='message']").text
         end
 
@@ -39,6 +41,8 @@ module RentBot
 
         def more_button
           @post_el.first(:xpath, ".//div[@role='button' and not(@aria-haspopup='menu')]")
+        rescue Capybara::ExpectationNotMet
+          # Text is not toggable
         end
 
         def post_url_pattern

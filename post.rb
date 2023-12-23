@@ -13,4 +13,3 @@ module RentBot
     end
   end
 end
-
