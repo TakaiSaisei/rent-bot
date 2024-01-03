@@ -35,6 +35,8 @@ module RentBot
 
     [
       "-headless",
+      "--no-sandbox",
+      "--disable-dev-shm-usage",
     ].each { |arg| options.add_argument(arg) }
 
     Capybara::Selenium::Driver.new(app, browser: :firefox, options: options)
