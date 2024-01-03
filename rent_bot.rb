@@ -29,4 +29,14 @@ module RentBot
 
     Capybara::Selenium::Driver.new(app, browser: :chrome, options: options)
   end
+
+  Capybara.register_driver :selenium_firefox_headless do |app|
+    options = Selenium::WebDriver::Firefox::Options.new
+
+    [
+      "-headless",
+    ].each { |arg| options.add_argument(arg) }
+
+    Capybara::Selenium::Driver.new(app, browser: :firefox, options: options)
+  end
 end

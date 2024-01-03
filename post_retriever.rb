@@ -39,7 +39,7 @@ module RentBot
           @on[:new_post].call(feed.first)
         else
           feed.each do |post|
-            break if processed.include?(post.id)
+            next if processed.include?(post.id)
 
             processed << post.id
             @on[:new_post].call(post)

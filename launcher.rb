@@ -15,7 +15,7 @@ module RentBot
 
           retriever.on_error do |e|
             TelegramChannel.send_plain_message(e.inspect)
-            raise e
+            # raise e
           end
         end
       end
